@@ -1,4 +1,5 @@
 # MoreModerBot
+## Подготовка к использованию
 
 1. Установите Microsoft Visual C++ 14.0 (2022). Оно необходимо для работы библиотеки TgCrypto. При установке выберите "Стандартные приложения C++". Ссылка для скачивания: https://visualstudio.microsoft.com/visual-cpp-build-tools/
 
