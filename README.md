@@ -10,4 +10,4 @@
 
 Получите TOKEN в https://t.me/BotFather/ и ADMIN_ID в https://t.me/username_to_id_bot/. Вставьте TOKEN, ID, HASH, и ADMIN_ID в файл tokens.py
 
-4. Замените файл pyrogram\methods\chats\get_chat_members.py. Добавленный код: https://qna.habr.com/q/1358994/
+4. Замените файл Lib\site-packages\pyrogram\methods\chats\get_chat_members.py. Добавленный код: https://qna.habr.com/q/1358994/
