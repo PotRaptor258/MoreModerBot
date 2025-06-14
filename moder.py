@@ -10,6 +10,7 @@ bot = Bot(token=TOKEN)
 dp = Dispatcher()
 app = Client("Tool", api_id=ID, api_hash=HASH, bot_token=TOKEN, in_memory=True)
 
+
 """Функция очистки чата от удалённых аккаунтов"""
 @dp.message(Command(commands=['no_deleted']))
 async def no_deleted(message: Message):
@@ -35,7 +36,10 @@ async def no_deleted(message: Message):
                 except:
                     pass
 
-            await message.reply(f"Убрано удалённых аккаунтов из чата: {count}")
+                await message.reply(f"Убрано удалённых аккаунтов из чата: {count}")
+
+            else:
+                await message.reply("Недостаточно прав!")
 
         except Exception as e:
             await message.reply("Ошибка!")
@@ -46,18 +50,29 @@ async def no_deleted(message: Message):
 
 """Функция очистки истории чата от пользователя"""
 @dp.message(Command(commands=['clear_messages']))
-async def no_deleted(message: Message):
+async def clear_messages(message: Message):
     chat_id = message.chat.id
-    user_id = message.from_user.id
+    message_id = message.message_id
     """Проверка на группу"""
     if message.chat.type in ['group', 'supergroup']:
+        """Запуск клиента"""
         try:
-            await bot.ban_chat_member(chat_id, user_id, revoke_messages=True)
-            await bot.unban_chat_member(chat_id, user_id)
+            await app.start()
+        except:
+            pass
+
+        try:
+            await app.delete_messages(chat_id, message_id, True)
             await message.reply("Сообщения были удалены!")
         except Exception as e:
             await message.reply("Ошибка!")
             await bot.send_message(ADMIN_ID, str(e))
+
+        """Остановка клиента"""
+        try:
+            await app.stop()
+        except:
+            pass
     else:
         await message.reply("Невозможно использовать команду здесь!")
 
